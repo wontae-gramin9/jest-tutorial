@@ -1,24 +1,13 @@
 const fn = require("./fn");
-test("toBe - checking primitive types, reference type are different instances on queue", () => {
-  expect(fn.add(1, 1)).toBe(2);
-  expect(fn.makeUser("Mike", 30)).toBe({
-    name: "Mike",
-    age: 30,
-  });
+
+test("null", () => {
+  expect(null).toBeNull();
 });
 
-test("toEqual - reference type, ignores undefined value ", () => {
-  expect(fn.add(1, 1)).toEqual(2);
-  expect(fn.makeUser("Mike", 30)).toEqual({
-    name: "Mike",
-    age: 30,
-  });
+test("0 is falsy", () => {
+  expect(fn.add(1, -1)).toBeFalsy();
 });
 
-test("toStrictEqual - acknowledges undefined value", () => {
-  expect(fn.add(1, 1)).toEqual(2);
-  expect(fn.makeUser("Mike", 30)).toStrictEqual({
-    name: "Mike",
-    age: 30,
-  });
+test("String is truthy", () => {
+  expect(fn.add("hello", "world")).toBeTruthy();
 });
