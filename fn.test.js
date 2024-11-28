@@ -1,20 +1,17 @@
 // mock function
-// 값을 리턴하는 함수
-const mockFn = jest.fn((num) => num + 1);
+// 중간에 리턴값을 바꾸거나 임의로 정해주고 싶다면?
+const mockFn = jest.fn();
 
-mockFn(10);
-mockFn(20);
-mockFn(30);
+// yield처럼, 함수가 call될때마다 순서대로 return값을 정해주는 것이다.
+mockFn
+  .mockReturnValueOnce(true)
+  .mockReturnValueOnce(false)
+  .mockReturnValueOnce(true)
+  .mockReturnValue(false);
 
-// 리턴값이 들어있다
-console.log(mockFn.mock.results);
+// 4번 call함
+const result = [1, 2, 3, 4, 5].filter((num) => mockFn(num));
 
-test("10에서 1 증가한 값", () => {
-  expect(mockFn.mock.results[0].value).toBe(11);
-});
-test("20에서 1 증가한 값", () => {
-  expect(mockFn.mock.results[1].value).toBe(21);
-});
-test("30에서 1 증가한 값", () => {
-  expect(mockFn.mock.results[2].value).toBe(31);
+test("홀수는 1.3", () => {
+  expect(result).toStrictEqaul([1, 3, 5]);
 });
