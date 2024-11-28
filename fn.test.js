@@ -1,6 +1,7 @@
 const fn = require("./fn");
 
-// 정규표현식 toMatch
-test("Hello world에 a가 있는가?", () => {
-  expect("Hello world").toMatch(/h/i);
+test("유저리스트에 Mike가 있는가?", () => {
+  const user = "Mike";
+  const userList = ["Tom", "Mike", "Kai"];
+  expect(userList).toContain(user);
 });
