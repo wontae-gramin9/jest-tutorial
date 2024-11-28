@@ -1,11 +1,11 @@
 const fn = require("./fn");
 
 let user;
-beforeEach(async () => {
+beforeAll(async () => {
   user = await fn.connectDb();
 });
 
-afterEach(async () => {
+afterAll(async () => {
   await fn.disconnectDb();
 });
 
