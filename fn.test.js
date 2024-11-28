@@ -1,21 +1,20 @@
 // mock function
-const mockFn = jest.fn();
+// 값을 리턴하는 함수
+const mockFn = jest.fn((num) => num + 1);
 
-function forEachAdd1(arr) {
-  arr.forEach((num) => {
-    // 내부 함수를 따로 implement하지 않고도 forEachAdd1를 테스트할 수 있다
-    mockFn(num + 1);
-  });
-}
+mockFn(10);
+mockFn(20);
+mockFn(30);
 
-forEachAdd1([10, 20, 30]);
+// 리턴값이 들어있다
+console.log(mockFn.mock.results);
 
-test("함수호출 3번", () => {
-  expect(mockFn.mock.calls.length).toBe(3);
+test("10에서 1 증가한 값", () => {
+  expect(mockFn.mock.results[0].value).toBe(11);
 });
-
-test("전달된 값 11, 21, 31", () => {
-  expect(mockFn.mock.calls[0][0]).toBe(11);
-  expect(mockFn.mock.calls[1][0]).toBe(21);
-  expect(mockFn.mock.calls[2][0]).toBe(31);
+test("20에서 1 증가한 값", () => {
+  expect(mockFn.mock.results[1].value).toBe(21);
+});
+test("30에서 1 증가한 값", () => {
+  expect(mockFn.mock.results[2].value).toBe(31);
 });
