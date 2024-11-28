@@ -1,49 +1,23 @@
 const fn = require("./fn");
 
-describe("User DB 관련 작업", () => {
-  // describe 블록은 테스트를 단위로 처리할 수 있게 해준다
-  // describe 내부의 before~~~, after~~~은 describe 블록마다 실행이 된다.
-  let user;
-  beforeAll(async () => {
-    user = await fn.connectUserDb();
-  });
+beforeAll(() => console.log("밖 beforeAll")); // 1
 
-  afterAll(async () => {
-    await fn.disconnectUserDb();
-  });
+// 전역에 Each를 쓰면, 매 describe 블록마다 실행된다는것만 알면 된다
+beforeEach(() => console.log("밖 beforeEach")); // 2, 6
+afterEach(() => console.log("밖 afterEach")); // 4, 10
+afterAll(() => console.log("밖 afterAll")); // -1
 
-  test("이름 Mike", () => {
-    expect(user.name).toBe("Mike");
-  });
-
-  test("나이 30", () => {
-    expect(user.age).toBe(30);
-  });
-
-  test("성별 남성", () => {
-    expect(user.gender).toBe("male");
-  });
+test("0+1 = 1", () => {
+  expect(fn.add(0, 1).toBe(1)); // 3
 });
 
-describe("Car 관련 작업", () => {
-  let car;
-  beforeAll(async () => {
-    car = await fn.connectCarDb();
-  });
+describe("새로운 scope", () => {
+  beforeAll(() => console.log("안 beforeAll")); // 5
+  beforeEach(() => console.log("안 beforeEach")); // 7
+  afterEach(() => console.log("안 afterEach")); // 9
+  afterAll(() => console.log("안 afterAll")); // -2
 
-  afterAll(async () => {
-    await fn.disconnectCarDb();
-  });
-
-  test("브랜드 bmw", () => {
-    expect(car.brand).toBe("bmw");
-  });
-
-  test("이름 z4", () => {
-    expect(car.name).toBe("z4");
-  });
-
-  test("색 red", () => {
-    expect(car.color).toBe("red");
+  test("0+1 = 1", () => {
+    expect(fn.add(0, 1).toBe(1)); // 8
   });
 });
