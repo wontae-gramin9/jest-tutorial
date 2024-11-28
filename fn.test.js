@@ -1,7 +1,7 @@
 const fn = require("./fn");
 
-test("유저리스트에 Mike가 있는가?", () => {
-  const user = "Mike";
-  const userList = ["Tom", "Mike", "Kai"];
-  expect(userList).toContain(user);
+test("이거 에러 나나요?", () => {
+  expect(() => fn.throwErr()).toThrow(
+    "특정 에러의 내용을 정확히 할때는 parameter로"
+  );
 });
