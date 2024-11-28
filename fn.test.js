@@ -2,8 +2,13 @@ const fn = require("./fn");
 
 test("3초 후 받아온 이름은 Mike", (done) => {
   function callback(name) {
-    expect(name).toBe("Tom");
-    done(); // done을 전달받았는데, 사용하지 않으면, 혹은 5초가 더 걸리면 실패
+    try {
+      expect(name).toBe("Tom");
+      done();
+      // done을 전달받았는데, 사용하지 않으면, 혹은 5초가 더 걸리면 실패
+    } catch (error) {
+      done(error);
+    }
   }
   fn.getName(callback);
   // fn.getName가 스택에 올라가고 실행되는 순간 끝나서

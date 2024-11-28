@@ -3,7 +3,8 @@ const fn = {
   getName: (callback) => {
     const name = "Mike";
     setTimeout(() => {
-      callback(name);
+      // callback(name);
+      throw new Error("서버 에러...");
     }, 3000);
   },
 };
